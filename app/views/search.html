@@ -1,0 +1,179 @@
+<div class="header header_pages search_page_header">
+	
+	<div ng-include="'views/_menu.html'"></div>
+
+	<div class="page_name wrap">
+		Search Result
+	</div>
+</div>
+
+
+<div class="search_page wrap">
+
+	<div class="menu">
+		<div class="form">
+			<h2>SPORTING GOODS</h2>
+			<label>Miles from zip code:</label>
+			<input type="number" class="half" placeholder="0" ng-model="params.radius">
+			<input type="text" class="half" placeholder="from zip">
+
+			<label>Price:</label>
+			<input type="number" class="half" placeholder="min">
+			<input type="number" class="half" placeholder="max">
+
+			<label>Status Option:</label>
+			<select ng-model="params.status">
+				<option value="">- Not Selected -</option>
+				<option value="1">Available</option>
+				<option value="2">Not Available</option>
+			</select>
+
+			<label>Job Type:</label>
+			<select ng-model="params.job_type">
+				<option ng-repeat="type in types" value="{{ type.id }}">{{ type.title }}</option>
+			</select>
+
+			<button ng-click="search()">Update Search</button>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="user" ng-repeat="user in users">
+			<div class="left">
+				<div class="avatar">
+					<img src="img/search_user.jpg" ng-if="user.avatar_url == null">
+					<img ng-src="{{ api_img + user.avatar_url }}" ng-if="user.avatar_url != null">
+				</div>
+				<div class="av" ng-class="avClass(1, user.vendor_status)"><span></span>Available</div>
+				<div class="av not_av" ng-class="avClass(2, user.vendor_status)"><span></span>Not Available</div>
+			</div>
+
+			<div class="about">
+				<div class="name">
+					<div class="rating">
+						<div>
+							Response rating by stars
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+						</div>
+
+						<div>
+							Satisfaction rating by stars
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+						</div>
+					</div>
+
+					<b>{{ user.first_name }} {{ user.last_name }}</b>
+					<br>
+				</div>
+
+				<div class="info">
+					<b>Experience/background description:</b>
+					<p ng-if="user.vendor_description == null">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,<br>adipisci velit. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,<br>adipisci velit.{{ user.vendor_description }}</p>
+				</div>
+
+				<div class="job_types">
+					<div ng-repeat="types in user.job_types">{{ types.title }}</div>
+				</div>
+
+				<div class="rate">
+					Hourly Rate:
+					<b>$10</b>
+				</div>
+
+				<div class="buttons">
+					<button>Hire Now</button>
+					<button>View Available Times</button>
+					<button class="vendor">Vendor Profile</button>
+				</div>
+			</div>
+
+
+
+			<div class="clear"></div>
+		</div>
+
+		<!--div class="user">
+			<div class="left">
+				<div class="avatar">
+					<img src="img/search_user.jpg">
+				</div>
+				<div class="av"><span></span>Available</div>
+				<div class="av not_av selected"><span></span>Not Available</div>
+			</div>
+
+			<div class="about">
+				<div class="name">
+					<div class="rating">
+						<div>
+							Response rating by stars
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+						</div>
+
+						<div>
+							Satisfaction rating by stars
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+							<img src="img/search_user_star_empty.png">
+						</div>
+					</div>
+					
+					First name:
+					<b>Jimmy Johnson</b>
+				</div>
+
+				<div class="info">
+					<b>Experience/background description:</b>
+					<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,<br>adipisci velit. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur,<br>adipisci velit.</p>
+				</div>
+
+				<div class="rate">
+					Hourly Rate:
+					<b>$10</b>
+				</div>
+
+				<div class="buttons">
+					<button>Hire Now</button>
+					<button>View Available Times</button>
+					<button class="vendor">Vendor Profile</button>
+				</div>
+			</div>
+
+
+
+			<div class="clear"></div>
+		</div-->
+
+		<div class="pagination">
+			<div>« Previous</div>
+			<div class="selected">1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>...</div>
+			<div>6</div>
+			<div>Next »</div>
+		</div>
+
+	</div>
+
+
+	<div class="clear"></div>
+
+</div>
+
+
+<div ng-include="'views/_footer.html'"></div>
